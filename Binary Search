@@ -1,0 +1,33 @@
+/// BINARY SEARCH ALGORITHM
+
+#include<bits/stdc++.h>
+#define ll long long
+#define endl "\n"
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+using namespace std;
+
+int main()
+{
+	FAST
+
+	int n,to_find;cin>>n;
+	int ar[n];
+	for(int i=0;i<n;i++)cin>>ar[i];
+	cin>>to_find;
+	int lo = 0 , hi = n-1, mid;
+	while(hi - lo > 1)
+	{
+		mid = (lo + hi)/2;
+		if( ar[mid] < to_find) lo = mid+1;
+		else hi = mid;
+	}
+
+	if(ar[lo] == to_find) cout<<lo<<endl;
+	else if(ar[hi]== to_find) cout<<hi<<endl;
+	else cout<<"NOT FOUND\n";
+
+
+
+
+	return 0;
+}
