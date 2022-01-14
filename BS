@@ -1,0 +1,21 @@
+int binary_search(int array[] , int value) //Taking parameters array and the value we need to find
+{
+	int right = (sizeof(array)/sizeof(array[0])) -1; // Array size
+	int left = 0 ;
+	int mid;
+	while(left<=right)
+	{
+		mid=(right+left)/2;
+		if(array[mid]==value)
+			return mid+1;
+		else if(array[mid]<value)
+			left= mid+1; //Cause value is greater than array[mid] value so upadating left
+		else
+			right = mid-1; //Cause value is less than array[mid] value so updating right
+	}
+	//if anything doesn't return then we can do 3 things here;
+	//   1. Here left means upper bound
+	//   2. Here Right means lower bound 
+	//   3. Or we can return anything
+	return -1;
+}
