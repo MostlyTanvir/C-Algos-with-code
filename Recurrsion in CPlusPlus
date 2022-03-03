@@ -1,0 +1,97 @@
+// BISMILLAHIR RAHMANIR RAHIM
+// TANVIR AHMED KHAN			
+// IUBAT CSE 
+// Date : 4th March, 2022
+#include<bits/stdc++.h>
+#define endl "\n"
+#define f first
+#define s second
+#define pi 2 * acos (0.0)
+#define setbitcount(a) __builtin_popcountll(a);
+#define ll long long
+#define mem(n) memset(n,0,sizeof(n))
+#define LCM(a,b) (a / __gcd(a,b) ) * b
+#define gcd(a,b) __gcd(a,b)
+#define bug(n) cout<<">> "<<n<<" <<\n";
+#define pb push_back
+#define squerit(n) (ll)n*n
+#define leading_zero(x) __builtin_clz(x)
+#define MOD 1000000007
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+using namespace std;	
+
+/// Recurrsion
+/// Sum of array using recurrsion
+
+/// function defination sum(n,a)
+/// sum(n,arr) -> sum of array arr upto n
+
+
+int sum (int n, int arr[]){
+	
+	/// Termination Condition for the recurrsion
+	if(n<0) return 0;
+	
+	/// Base Function
+	/// sum(n,arr) = sum(n-1,arr) + arr[n] ;
+	return arr[n] + sum(n-1,arr);
+}
+
+/// Digit sum using recurrsion
+/// Workings digit_sum(1234) -> 4 + digit_sum(123);
+/// Workings digit_sum(n) -> n%10 + digit_sum(n/10);
+
+int digit_sum(long long n){
+
+	/// Termination condition of Function
+
+	if(n==0) return 0;
+
+	/// Base function n%10 + digit_sum(n/10);
+
+	return n%10 + digit_sum(n/10);
+
+}
+
+/* Sample Input
+
+  10
+  1 2 3 4 5 6 7 8 9 10
+
+*/
+
+void solve(){
+	
+	int n; cin>>n;
+	
+	int ar[n];
+	
+	for(int i=0;i<n;i++){
+		
+		cin>>ar[i];
+	
+	}
+
+	/// As array indexing starts from 0  
+	/// And to sum n elements we have to reduce one from it
+
+	cout << sum(n-1,ar) << endl;
+	
+	/// Digit sum function can take up to 18 digits
+
+	cout<< digit_sum(123456789999999) <<endl;
+}
+
+
+int main()
+{
+	FAST
+
+	// int tc; cin >> tc; while( tc-- )
+
+	solve();	
+
+
+	return 0;
+}
+
