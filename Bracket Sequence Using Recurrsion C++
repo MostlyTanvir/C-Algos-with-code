@@ -1,0 +1,117 @@
+// BISMILLAHIR RAHMANIR RAHIM
+// TANVIR AHMED KHAN			
+// IUBAT CSE 
+// Date : 4th March, 2022
+
+
+/// PROBLEM LINK : https://leetcode.com/problems/generate-parentheses/
+
+
+#include<bits/stdc++.h>
+#define endl "\n"
+#define f first
+#define s second
+#define pi 2 * acos (0.0)
+#define setbitcount(a) __builtin_popcountll(a);
+#define ll long long
+#define mem(n) memset(n,0,sizeof(n))
+#define LCM(a,b) (a / __gcd(a,b) ) * b
+#define gcd(a,b) __gcd(a,b)
+#define bug(n) cout<<">> "<<n<<" <<\n";
+#define pb push_back
+#define squerit(n) (ll)n*n
+#define leading_zero(x) __builtin_clz(x)
+#define MOD 1000000007
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+using namespace std;	
+
+/// Recurrsion
+
+/// Brackets possible valid strings generation using reccursion
+
+/// Global vector of sting for storing the valid strings
+
+vector<string> valid_string;
+
+
+void generate(string &s, int open, int close){
+
+	/// Termination of function
+
+	/// when the opening and closing brackets will be 0 then it will terminate
+
+	if(open==0 and close==0){
+		valid_string.push_back(s);
+		return;
+	}
+
+
+	/// If there is opeing brackets left in our open var
+
+	if(open > 0){
+		s.push_back('(');
+
+		generate(s, open-1, close);
+
+		/// Back Tracking noting but restoring the previous positions of each recursive steps
+
+		s.pop_back();
+	}
+
+	/// If there is closing brackets left in our close var
+
+	if(close > 0){
+
+		/// it the number of openning < closing brackets 
+
+		/// Then it will proceed with the closing bracket storing
+
+		if(open < close){
+
+		/// it will push the closing bracket
+
+			s.push_back(')');
+
+			generate(s, open, close-1);
+
+		/// Back Tracking noting but restoring the previous positions of each recursive steps
+
+			s.pop_back();
+		}
+
+	}
+
+
+}
+
+
+
+
+void solve(){
+	
+	int len; cin >> len;
+	
+	string temp;
+	
+	generate(temp, len, len);
+
+	for(auto u : valid_string){
+	
+		cout<< u << endl;
+	
+	}
+	
+}
+
+
+int main(){
+
+	FAST
+
+	// int tc; cin >> tc; while( tc-- )
+
+	solve();	
+
+	return 0;
+}
+
