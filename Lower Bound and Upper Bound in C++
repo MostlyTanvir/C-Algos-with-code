@@ -1,0 +1,44 @@
+
+ll upperBound(vector<int> &v, ll x){
+
+	ll low = 0, high = v.size()-1, mid;
+
+	while(low <= high){
+
+		mid = (low+high)/2;
+
+		/// Only greater than equal condition is changed from lowerBound
+
+		if(v[mid]<=x){
+
+			low = mid+1;
+
+		}else{
+
+			high = mid-1;
+
+		}
+	}	
+		return low;
+}
+
+ll lowerBound(vector<int> &v, ll x){
+
+	ll low = 0, high = v.size()-1, mid;
+
+	while(low <= high){
+
+		mid = (low+high)/2;
+
+		if(v[mid]<x){
+
+			low = mid+1;
+
+		}else{
+
+			high = mid-1;
+
+		}
+	}	
+		return low;
+}
