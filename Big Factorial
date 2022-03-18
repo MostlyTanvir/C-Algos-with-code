@@ -1,0 +1,53 @@
+////https://lightoj.com/problem/problem-makes-problem
+
+/// Big factorial problem
+
+#include<bits/stdc++.h>
+typedef long long ll;
+using namespace std;
+const ll MOD =  1e9+7;
+const ll MaxN = 2000007;
+
+ll fact[MaxN];
+void precalculate(){
+    fact[0]=1;
+    for(int i = 1; i < MaxN ; i++){
+        fact[i]=(((fact[i-1])*i)%MOD );
+    }
+}
+
+
+ll power(ll a, ll b){
+    if(b==0)return 1;
+    ll r = power(a,b/2);
+    r = (r*r)% MOD;
+    if(b%2!=0)r = (r * a)% MOD;
+    return r;
+}
+ll inverse(ll x){
+    return power(x, MOD-2);
+}
+ll nCr(ll n, ll k){
+    ll a = fact[n+k-1];
+    ll b = fact[n];
+    ll c = fact[k-1];
+    ll inv = inverse((b*c)%MOD);
+    ll ans = (a* inv)%MOD;
+    return ans;
+
+}
+
+
+int main(){
+    ll n,r;
+    precalculate();
+
+    int tc; cin >>tc;
+    for(int i=1;i<=tc;i++){
+        ll n,k; cin >>n>>k;
+        cout << "Case " << i <<": "<< nCr(n,k)<<endl;
+    }
+
+    return 0;
+}
+
