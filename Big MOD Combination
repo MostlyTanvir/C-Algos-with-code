@@ -1,0 +1,75 @@
+// BISMILLAHIR RAHMANIR RAHIM
+// TANVIR AHMED KHAN			
+#include<bits/stdc++.h>
+typedef long long ll;
+#define endl "\n"
+#define f first
+#define s second
+#define pi 2 * acos (0.0)
+#define setbitcount(a) __builtin_popcountll(a);
+#define mem(n) memset(n,0,sizeof(n))
+#define LCM(a,b) (a / __gcd(a,b) ) * b
+#define gcd(a,b) __gcd(a,b)
+#define bug(n) cout<<">> "<<n<<" <<\n";
+#define pb push_back
+#define squerit(n) (ll)n*n
+#define leading_zero(x) __builtin_clz(x)
+const ll MOD =  1e9+7;
+const ll MaxN = 2000007;
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+using namespace std;	
+
+ll fact[MaxN];
+
+/// Don't forget to call me🙂
+void precalculate(){
+	fact[0]=1;
+	for(int i=1;i<MaxN;i++){
+		fact[i] = (fact[i-1]*i)%MOD;
+	}
+}
+
+/// User defined Power function
+ll power(ll a, ll b){
+	if(b==0) return 1;
+	ll r = power(a,b/2);
+	r = (r*r)%MOD;
+	if(b%2) r = (r*a)%MOD;
+	return r;
+}
+
+
+ll inv(ll x){
+	return power(x, MOD-2);
+}
+
+/// Formula is like (n! * pow((n-r)!*r!),-1) )
+/// its like inversing the bottom par
+ll nCr(ll n, ll r){
+	ll top = fact[n];
+	ll b = fact[n-r];
+	ll c = fact[r];
+	ll bottom = (b*c)%MOD;
+	bottom = inv(bottom);
+	return (top * bottom) % MOD;
+}
+
+
+void solve(){
+	precalculate();
+	cout << nCr(5,3) <<endl;
+
+}
+
+
+int main(){
+
+	FAST
+
+	// int tc; cin >> tc; while( tc-- )
+
+	solve();	
+
+	return 0;
+}
+
