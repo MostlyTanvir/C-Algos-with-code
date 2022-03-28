@@ -1,0 +1,64 @@
+// BISMILLAHIR RAHMANIR RAHIM
+// TANVIR AHMED KHAN			
+#include<bits/stdc++.h>
+typedef unsigned long long ll;
+#define endl "\n"
+#define f first
+#define s second
+#define pi 2 * acos (0.0)
+#define setbitcount(a) __builtin_popcountll(a);
+#define mem(n) memset(n,0,sizeof(n))
+#define LCM(a,b) (a / __gcd(a,b) ) * b
+#define gcd(a,b) __gcd(a,b)
+#define bug(n) cout<<">> "<<n<<" <<\n";
+#define pb push_back
+#define squerit(n) (ll)n*n
+#define leading_zero(x) __builtin_clz(x)
+const ll MOD =  1e9+7;
+const ll MaxN = 2000007;
+#define FAST ios_base::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+using namespace std;	
+
+
+
+void selection_sort(vector<ll> &v){
+
+	ll start = 0, end = v.size()-1, pos = 0;
+
+	for(ll i = start; i<=end ; i++){
+
+		pos = min_element(v.begin()+i,v.end())-v.begin();
+
+		swap(v[pos],v[i]);
+
+	}
+
+}
+
+
+
+void solve(){
+
+	ll n; cin >> n;
+
+	vector<ll> v(n);
+
+	for( ll i=0; i<n;i++) cin >> v[i];
+	
+	selection_sort(v);
+
+	for(auto u : v) cout << u << " ";	
+
+}
+
+int main(){
+
+	FAST
+	
+	// int tc; cin >> tc; while (tc--)
+
+	solve();	
+
+	return 0;
+}
+
