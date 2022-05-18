@@ -83,14 +83,16 @@ void solve(){
 	// Taking the input and mapping the graph using adjacency matrix
 	
 	int v1,v2;
+	
+	// int weight;
 		
 	for(int i=0; i<edges; i++){
 		
-		cin >> v1 >> v2;
+		cin >> v1 >> v2 /*>> weight*/;
 		
-		graph[v1][v2]=1;
+		graph[v1][v2]=1; // if there is a weight put the weight instead of 1
 		
-		graph[v2][v1]=1;
+		graph[v2][v1]=1; // if there is a weight put the weight instead of 1
 		
 	}
 	
