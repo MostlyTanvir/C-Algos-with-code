@@ -1,0 +1,132 @@
+//________________________________________________________________________________________
+//
+//				BISMILLAHIR RAHMANIR RAHIM
+//				TANVIR AHMED KHAN
+//________________________________________________________________________________________
+//
+
+#include<bits/stdc++.h>
+
+typedef		long long ll;
+const		ll 		MOD  	= 	1e9 + 7;
+const		ll 		M 	= 	1e5+7;
+using namespace std;
+
+//________________________________________________________________________________________
+//
+
+#define 	pb				push_back
+#define 	endl            "\n"
+#define 	f               first
+#define 	s               second
+#define 	pi              2 * acos(0.0)
+#define		cy				cout << "Yes\n";
+#define		cn				cout << "No\n";
+#define 	FAST ios_base::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+
+//________________________________________________________________________________________
+//
+
+// Implementation of Segement Tree
+
+ll ar[M];
+ll tree[4*M];
+
+
+// Building / Initialization of Segment Tree
+// O(n.logn)
+void build(int node, int begin, int end){ 
+	
+	if(begin == end){
+		tree[node] = ar[begin];
+		return;
+	}	
+	
+	int left_node = node * 2;
+	int right_node = node * 2 + 1;
+	int mid = (begin + end)/2;
+	
+	build(left_node, begin, mid);
+	build(right_node, mid+1, end);
+	
+	tree[node] = min(tree[left_node], tree[right_node]);
+}
+
+// Making queries to the by the tree
+// O(logn)
+ll query(int node, int begin, int end, int left, int right){ 
+	
+	if(begin>right or end<left) return INT_MAX;
+	
+	if(begin>=left and end<=right) return tree[node] ;
+	
+	
+	int left_node = node * 2;
+	int right_node = node * 2 + 1;
+	int mid = (begin + end)/2;
+	
+	int m = query(left_node, begin, mid, left, right);
+	int n = query(right_node, mid+1, end, left, right);
+	
+	return min(n,m);
+	
+}
+
+// Updating the array element in the tree as well as in the array
+//O(logn)
+void update(int node, int begin, int end, int index, int value){ 
+	
+	if(begin>index or end<index) return;
+	if(begin==index and end==index){
+		tree[node] = value;
+		return;
+	}
+	int left = node*2;
+	int right = node * 2 +1 ;
+	int mid = (begin+end)/2;
+	
+	update(left,begin,mid,index,value);
+	update(right,mid+1,end,index, value);
+	
+	tree[node] = min(tree[left], tree[right]);
+	
+}
+
+
+void solve(){
+	
+	int n , q; cin >> n  >> q;
+	for(int i=1;i<=n;i++) cin >> ar[i];
+	build(1,1,n);
+	int l,r;
+	update(1,1,n,3,-5);
+	while(q--){
+		cin >> l >> r;
+		
+		cout << query(1,1,n,l,r) << endl;
+		
+	}
+	
+	
+}
+
+
+
+int main(){
+	
+	FAST
+	
+	/// With Test Case
+	
+	int test_case, c = 0; cin >> test_case; while(test_case--) {cout <<"Case "<<++c<<":\n"; solve();}
+	
+	/// Without Test Cas
+	
+	return 0;
+}
+
+//________________________________________________________________________________________
+//
+// 			ALHAMDULILLAH
+//________________________________________________________________________________________
+//
