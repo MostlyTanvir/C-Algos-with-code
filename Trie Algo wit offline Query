@@ -1,0 +1,124 @@
+/// PROBLEM LINK : https://www.codingninjas.com/codestudio/problems/max-xor-queries_1382020?leftPanelTab=1
+
+#include "bits/stdc++.h"
+struct Node{
+
+    Node* link[2];
+
+    bool contains(int bit){
+        return (link[bit]!=NULL);
+    }
+
+    void put(int bit){
+        link[bit] = new Node();
+    }
+
+    Node* get(int bit){
+
+        return  link[bit];
+
+    }
+
+};
+
+class Trie{
+
+private: Node* root;
+public:
+
+    Trie(){
+        root = new Node();
+    }
+
+    void insert(int n){
+
+        Node* node = root;
+
+        for(int i=31;i>=0;i--){
+
+            int bit = (n >> i) & 1;
+
+            if(!node->contains(bit)){
+
+                node->put(bit);
+
+            }
+
+            node = node->get(bit);
+
+        }
+
+    }
+
+    int getMax(int n){
+
+        Node *node = root;
+        int mx = 0;
+        for(int i=31;i>=0;i--){
+            int bit = (n >> i) & 1;
+
+            if(node->contains(1-bit)){
+
+                mx = mx | (1<<i);
+
+                node = node->get(1-bit);
+
+            }else{
+
+                node = node->get(bit);
+
+            }
+            
+        }
+
+        return mx;
+
+    }
+
+};
+
+vector<int> maxXorQueries(vector<int> &arr, vector<vector<int>> &queries){
+
+	sort(arr.begin(),arr.end());
+
+	vector< pair< int, pair<int,int> > > oq;
+
+	int sz = queries.size();
+
+	for(int i=0;i<sz;i++){
+
+		int m = queries[i][1];
+		int a = queries[i][0];
+
+        oq.push_back( make_pair( m, make_pair(a,i) ) );
+    }
+
+	sort(oq.begin(),oq.end());
+
+	vector<int> ans(queries.size(),0);
+
+	Trie trie;
+
+	for (int i = 0, idx = 0 ; i < sz; i++) {
+
+		int mx = oq[i].first;
+		int xi = oq[i].second.first;
+		int qind = oq[i].second.second;
+
+		while( idx<arr.size() and arr[idx]<=mx ){
+
+			trie.insert(arr[idx]);
+			idx++;
+
+		}
+		if(idx == 0) ans[qind] = -1;
+		else{
+			ans[qind] = trie.getMax(xi);
+		}
+
+	}
+
+	return ans;
+
+        //	Write your coode here.
+}
