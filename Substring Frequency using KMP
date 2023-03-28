@@ -1,0 +1,130 @@
+// Problem: Substring Frequency
+// Contest: LightOJ
+// URL: https://lightoj.com/problem/substring-frequency
+// Memory Limit: 64 MB
+// Time Limit: 1000 ms
+// 
+// Powered by CP Editor (https://cpeditor.org)
+
+// Problem: B. Stand-up Comedian
+// Contest: Codeforces - Educational Codeforces Round 142 (Rated for Div. 2)
+// URL: https://codeforces.com/contest/1792/problem/B
+// Memory Limit: 256 MB
+// Time Limit: 2000 ms
+
+//________________________________________________________________________________________
+//
+//				BISMILLAHIR RAHMANIR RAHIM
+//				TANVIR AHMED KHAN
+//________________________________________________________________________________________
+//
+
+#include<bits/stdc++.h>
+
+typedef		long long 	ll;
+const		ll 			MOD 	= 	1e9 + 7;
+const		ll 			N	= 	2e5+7;
+using namespace std;
+
+//________________________________________________________________________________________
+//
+
+#define 	pb				push_back
+#define 	endl            "\n"
+#define 	f               first
+#define 	s               second
+#define 	pi              2 * acos(0.0)
+#define	cy				cout << "Yes\n";
+#define	cn				cout << "No\n";
+#define 	FAST ios_base::sync_with_stdio(false); cin.tie(0); cout.tie(0);
+#define check(x)	x?cout <<"YES\n":cout <<"NO\n";
+
+//________________________________________________________________________________________
+//
+
+/// Longest Proper Prefix and Suffix Table LSP or PI TABLE
+vector<int> LPS(string x){
+	
+	int n = x.size();
+		
+	vector<int> lps(n,0);
+	
+	for(int i=1; i<n; i++){
+		
+		int j = lps[i-1];
+		
+		/// this loop runs in O(n) times
+		while(j>0 and x[i]!=x[j]){
+			
+			j = lps[j-1];
+			
+		}
+		
+		if(x[i]==x[j]){
+			j++;
+		}
+		
+		lps[i] = j;
+		
+	}
+	
+	return lps;
+	
+}
+
+void solve(){
+	
+	string s,t; cin >> s >> t;
+	
+	vector<int> lps = LPS(t);
+	
+	int ans = 0;
+
+	for(int i = 0, j = 0; i < s.size() ; i++ ) {
+		
+		if(s[i]==t[j]){
+			
+			j++;
+			
+		}else if(j){ /// if it does not match and J is non zero
+			
+			j = lps[j-1];
+			
+			i--;
+		}
+		
+		if(t.size()==j){
+			
+			ans++;
+			
+			j=lps[j-1];
+			
+		}
+		
+	}
+	cout << ans << endl;
+	
+	
+	
+}
+
+
+
+int main(){
+	
+	FAST
+	
+	/// With Test Case
+	
+	int test_case, c = 0; cin >> test_case; while(test_case--) {cout <<"Case "<<++c<<": "; solve();}
+	
+	
+	
+	return 0;
+}
+
+//________________________________________________________________________________________
+//
+// 			ALHAMDULILLAH
+//________________________________________________________________________________________
+//
