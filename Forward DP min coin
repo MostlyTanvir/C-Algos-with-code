@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+const int N=100000;
+
+int dp[N];
+int main(){
+
+
+    int n,target;
+    cin >> n >> target;
+
+    for(int i=0;i<=target;i++){
+        dp[i] = 1e9+7 ;
+    }
+
+    int ar[n];
+
+    for(int i=0;i<n;i++){
+
+        cin >> ar[i];
+
+    }
+    dp[0] = 0;
+
+    int dp2[target+1];
+
+    for(int i=0;i<n;i++){
+
+        for(int p=0;p<=target;p++){
+            dp2[p] = dp[p];
+        }
+
+        for(int j=0;j<=target;j++){
+
+            if(j-ar[i]>=0){
+
+                dp2[j] = min(dp2[j],1+dp[j-ar[i]]);
+
+            }
+        }
+
+        for(int p=0;p<=target;p++){
+            dp[p] = dp2[p];
+        }
+
+//        cout << "Iteration - " <<i+1 << endl;
+//        for(int p=0;p<=target;p++){
+//            cout << dp[p] <<" ";
+//        }
+//        cout << endl;
+
+    }
+//    for(int i=0;i<target;i++){
+//
+//        cout << dp[i] <<" ";
+//    }
+    cout << dp[target] << endl;
+
+
+    return 0;
+}
