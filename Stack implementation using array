@@ -1,0 +1,109 @@
+#include<bits/stdc++.h>
+using namespace std;
+#include<stack>
+
+/*
+	
+	STACK IMPLEMENTATION USING ARRAY IN C++
+
+*/
+
+class Stack{
+	
+	public:
+		
+		int ar[10];
+		int pos = 0;
+		
+	
+	
+	void push(int x){
+		
+		if(pos>=9){
+			cout << "Stack overflow\n";
+			return;
+		}
+		pos++;
+		ar[pos] = x;
+		
+	}
+	
+	void pop(){
+		
+		if(pos==0){
+			cout << "Stack underflow\n";
+			return;
+		}
+		pos--;
+		
+	}
+	
+	int size(){
+		
+		return pos;
+		
+	}
+	
+	int top(){
+		if(pos==0) {
+			cout << "Stack Empty\n";
+			return 0;
+		}
+		return ar[pos];
+	}
+	
+	bool isempty(){
+		
+		if(pos!=0) return false;
+		else return true;
+		
+	}
+	
+	
+};
+
+
+
+void solve(){
+	
+	
+	Stack st;
+	
+	st.push(5);
+	st.push(6);
+	st.push(7);
+	st.push(15);
+	st.push(15);
+	st.push(15);
+	st.push(15);
+	st.push(15);
+	st.push(15);
+	st.push(15);
+	st.push(15);
+	cout << st.top() << endl;
+	cout << st.size() << endl;
+	cout << st.isempty() << endl;
+	st.pop();
+	st.pop();
+	st.pop();
+	st.pop();
+	st.pop();
+	st.push(99);
+	cout << st.top() << endl;
+	cout << st.size() << endl;
+	
+	
+	
+	
+
+	
+}
+
+
+
+int main(){
+	
+	solve();
+	
+	return 0;
+}
